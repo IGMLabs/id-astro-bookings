@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/id-astro-bookings'),
+      dir: require('path').join(__dirname, './coverage/ab-astro-bookings'),
       subdir: '.',
       reporters: [
         { type: 'html' },

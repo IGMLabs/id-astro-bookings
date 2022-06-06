@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "id-astro-bookings": {
+    "ab-astro-bookings": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
@@ -41,7 +44,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/id-astro-bookings",
+            "outputPath": "dist/ab-astro-bookings",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -51,6 +54,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@picocss/pico/css/pico.fluid.classless.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -92,10 +96,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "id-astro-bookings:build:production"
+              "browserTarget": "ab-astro-bookings:build:production"
             },
             "development": {
-              "browserTarget": "id-astro-bookings:build:development"
+              "browserTarget": "ab-astro-bookings:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,7 +107,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "id-astro-bookings:build"
+            "browserTarget": "ab-astro-bookings:build"
           }
         },
         "test": {
@@ -126,5 +130,5 @@
       }
     }
   },
-  "defaultProject": "id-astro-bookings"
+  "defaultProject": "ab-astro-bookings"
 }
