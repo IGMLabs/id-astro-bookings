@@ -4,6 +4,8 @@ import { AgenciesPage } from './agencies.page';
 
 const routes: Routes = [
   { path: '', component: AgenciesPage },
+  { path: 'agency/new', loadChildren: () => import('./new-agency/new-agency.module').then(m => m.NewAgencyModule) },
+
   {
     path: 'agency/:id',
     loadChildren: () =>
