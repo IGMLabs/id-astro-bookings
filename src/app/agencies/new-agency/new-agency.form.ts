@@ -10,14 +10,14 @@ import {
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
+import { Form } from 'src/app/core/forms/form.base';
 
 @Component({
   selector: 'app-new-agency-form',
   templateUrl: './new-agency.form.html',
   styleUrls: ['./new-agency.form.css'],
 })
-export class NewAgencyForm implements OnInit {
-  public form: FormGroup;
+export class NewAgencyForm extends Form implements OnInit {
   public ranges = [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {
@@ -28,24 +28,16 @@ export class NewAgencyForm implements OnInit {
   ];
   public statuses = ['Active', 'Pending'];
 
-  constructor(public formBuilder: FormBuilder, public fms: FormMessagesService, public fvs: FormValidationsService, public cms: CommonService) {
+  constructor(public formBuilder: FormBuilder,  fms: FormMessagesService, public fvs: FormValidationsService, public cms: CommonService) {
+    super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       range: new FormControl('', [Validators.required]),
       status: new FormControl(this.statuses[0]),
     });
-  }
-  public hasError(controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
+
   }
 
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
-  }
   public onSubmitClick() {
     const { name, range, status } = this.form.value;
     const id = this.getDashId(name);
@@ -57,8 +49,6 @@ export class NewAgencyForm implements OnInit {
     return this.cms.getDashId(str);
   }
 
-  private getControl(controlName: string): AbstractControl | null {
-    return this.form.get(controlName);
-  }
+
   ngOnInit(): void {}
 }

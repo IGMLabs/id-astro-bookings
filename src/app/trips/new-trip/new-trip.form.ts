@@ -10,15 +10,16 @@ import {
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
+import { Form } from 'src/app/core/forms/form.base';
 
 @Component({
   selector: 'app-new-trip-form',
   templateUrl: './new-trip.form.html',
   styleUrls: ['./new-trip.form.css']
 })
-export class NewTripForm implements OnInit {
+export class NewTripForm extends Form implements OnInit {
   public start_date = 0;
-  public form: FormGroup;
+
   public agencies = [
     {
       id: 'space-y',
@@ -42,7 +43,8 @@ export class NewTripForm implements OnInit {
 
 
 
-  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService, public fms: FormMessagesService, public cms: CommonService) {
+  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService) {
+    super(fms);
     this.form = formBuilder.group({
       agency: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)] ),
@@ -89,17 +91,6 @@ export class NewTripForm implements OnInit {
     return;
   }
 
-  public hasError(controlName: string): boolean {
-    return this.fms.hasError(this.form, controlName);
-  }
-
-  public mustShowMessage(controlName: string): boolean {
-    return this.fms.mustShowMessage(this.form, controlName);
-  }
-
-  public getErrorMessage(controlName: string): string {
-    return this.fms.getErrorMessage(this.form, controlName);
-  }
 
   public onSubmitClick(){
     const {agency, destination, places, start_date, end_date, flightPrice} = this.form.value;

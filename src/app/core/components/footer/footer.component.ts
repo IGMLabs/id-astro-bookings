@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
 
   public subtitle = 'Welcome on board';
-  public author = 'Susana López';
+  public author = 'Iván Doce ';
   public authorUrl = 'https://www.google.es';
   constructor() { }
 
