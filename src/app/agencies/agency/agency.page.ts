@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './agency.page.html',
-  styleUrls: ['./agency.page.css'],
+  styleUrls: ['./agency.page.css']
 })
 export class AgencyPage implements OnInit {
   public agencyId: string;
@@ -12,5 +12,7 @@ export class AgencyPage implements OnInit {
     this.agencyId = route.snapshot.paramMap.get('id') || '';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
 }

@@ -12,4 +12,6 @@ export class NewAgencyPage implements OnInit {
   ngOnInit(): void {
   }
 
+  onSave(){}
+
 }

@@ -6,6 +6,6 @@ const routes: Routes = [{ path: '', component: NewAgencyPage }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class NewAgencyRoutingModule {}
+export class NewAgencyRoutingModule { }

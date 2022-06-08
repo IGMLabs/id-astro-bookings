@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/core/commons/common.service';
+import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
+import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
+
 
 @Component({
   selector: 'app-login-form',
@@ -7,53 +11,41 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   styleUrls: ['./login.form.css']
 })
 export class LoginForm implements OnInit {
-  public form: FormGroup;
-  constructor(formBuilder: FormBuilder) {  this.form = formBuilder.group({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(10),
-    ]),
-  }
-  );}
 
-  ngOnInit(): void {
+  public form: FormGroup;
+
+  constructor(formBuilder: FormBuilder, public fms: FormMessagesService, public fvs: FormValidationsService, public cms: CommonService) {
+    this.form = formBuilder.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
+    });
   }
+
+
+  public hasError(controlName: string):boolean {
+    return this.fms.hasError(this.form, controlName);
+  }
+
+  public mustShowMessage(controlName: string): boolean {
+    return this.fms.mustShowMessage(this.form, controlName);
+  }
+
   public getControl(controlName: string): AbstractControl | null {
     return this.form.get(controlName);
   }
 
-  public mustShowMessage(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false;
-    return control.touched && control.invalid;
-  }
-
   public getErrorMessage(controlName: string): string {
-    const control = this.getControl(controlName);
-    if (!control) return '';
-    if (!control.errors) return '';
-    const errors = control.errors;
-    let errorMessage = '';
-    errorMessage += errors['email'] ? '🔥 Should be an email address' : '';
-    errorMessage += errors['minlength']
-      ? `🔥 More than ${errors['minlength'].requiredLength} chars`
-      : '';
-    errorMessage += errors['maxlength']
-      ? `🔥 Less than ${errors['maxlength'].requiredLength} chars`
-      : '';
-    return errorMessage;
-  }
-  public onSave() {
-    const contact = this.form.value;
-    console.warn('Login', contact);
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
-  public hasError(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false;
-    return control.invalid;
+  public onSave() {
+    const {email, password} = this.form.value;
+    const login = {email, password};
+    console.warn('Send Login', login);
+  }
+
+
+  ngOnInit(): void {
   }
 
 }

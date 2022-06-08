@@ -3,14 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+
   public subtitle = 'Welcome on board';
-  public author = 'Iván Doce';
-  public authorUrl = 'https://www.google.com';
+  public author = 'Susana López';
+  public authorUrl = 'https://www.google.es';
+  constructor() { }
 
-  constructor() {}
+  ngOnInit(): void {
+  }
 
-  ngOnInit(): void {}
 }

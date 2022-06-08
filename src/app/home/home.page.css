@@ -1,15 +1,12 @@
 .active {
   font-weight: bold;
 }
-
 .pending {
-  font-style: italic;
+  font-weight: italic;
 }
-
 .green {
   color: green;
 }
-
 .orange {
   color: orange
 }
