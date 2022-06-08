@@ -7,6 +7,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Agency } from 'src/app/core/api/agency.interface';
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
@@ -20,7 +21,7 @@ import { Form } from 'src/app/core/forms/form.base';
 export class NewTripForm extends Form implements OnInit {
   public start_date = 0;
 
-  public agencies = [
+  public agencies:Agency[] = [
     {
       id: 'space-y',
       name: 'Space Y',

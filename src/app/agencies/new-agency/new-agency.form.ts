@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { IdName } from 'src/app/core/api/id-name.interface';
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
@@ -18,7 +19,7 @@ import { Form } from 'src/app/core/forms/form.base';
   styleUrls: ['./new-agency.form.css'],
 })
 export class NewAgencyForm extends Form implements OnInit {
-  public ranges = [
+  public ranges:IdName[]= [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {
       id: 'Interplanetary',
