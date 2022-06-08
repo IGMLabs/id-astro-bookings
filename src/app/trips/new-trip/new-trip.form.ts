@@ -7,7 +7,9 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
+import { Trips } from 'src/app/core/api/trips.api';
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
@@ -20,32 +22,15 @@ import { Form } from 'src/app/core/forms/form.base';
 })
 export class NewTripForm extends Form implements OnInit {
   public start_date = 0;
-
-  public agencies:Agency[] = [
-    {
-      id: 'space-y',
-      name: 'Space Y',
-      range: 'Interplanetary',
-      status: 'Active',
-    },
-    {
-      id: 'green-origin',
-      name: 'Green Origin',
-      range: 'Orbital',
-      status: 'Active',
-    },
-    {
-      id: 'virgin-way',
-      name: 'Virgin Way',
-      range: 'Orbital',
-      status: 'Pending',
-    },
-  ];
+public agencies:Agency[];
+private tripApi:Trips;
 
 
 
-  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService) {
+  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService, private agenciesApi:AgenciesApi,  tripApi:Trips) {
     super(fms);
+    this.agencies=agenciesApi.getAll();
+    this.tripApi=tripApi;
     this.form = formBuilder.group({
       agency: new FormControl('', [Validators.required]),
       destination: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)] ),
@@ -98,6 +83,7 @@ export class NewTripForm extends Form implements OnInit {
     const id = this.getDashId(agency + "-" + destination);
     const newTripData = {id, agency, destination, places, start_date, end_date, flightPrice};
     console.warn('Send trip data ', newTripData)
+this.tripApi.post(newTripData);
   }
 
   private getDashId(str: string):string {

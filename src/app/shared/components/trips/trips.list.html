@@ -1,7 +1,7 @@
 <article>
-  <h3>Offering {{ trips.length }} trips</h3>
+  <h3>Offering {{ tripApi.length }} trips</h3>
   <ul>
-    <li *ngFor="let trip of trips">
+    <li *ngFor="let trip of tripApi">
       <a [routerLink]="['/','trips','trip', trip.id]"
       [ngClass]="getClassForStatus(trip.status)">{{ trip.destination }}</a>
       <span> 💸 {{ trip.flightPrice | currency }}</span>
