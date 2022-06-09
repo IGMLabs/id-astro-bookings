@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
+import { Trip } from 'src/app/core/api/trip.interface';
 import { TripsApi } from 'src/app/core/api/trips.api';
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
@@ -22,7 +23,11 @@ import { Form } from 'src/app/core/forms/form.base';
 })
 export class NewTripForm extends Form implements OnInit {
   public start_date = 0;
-public agencies:Agency[];
+@Input() public agencies:Agency[]=[];
+@Input() public trips:Partial<Trip>[]=[];
+
+@Output() public save=new EventEmitter<Partial<Trip>>();
+
 private tripApi:TripsApi;
 
 
@@ -30,6 +35,7 @@ private tripApi:TripsApi;
   constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService, private agenciesApi:AgenciesApi,  tripApi:TripsApi) {
     super(fms);
     this.agencies=agenciesApi.getAll();
+    this.trips=tripApi.getAll();
     this.tripApi=tripApi;
     this.form = formBuilder.group({
       agency: new FormControl('', [Validators.required]),
@@ -82,8 +88,10 @@ private tripApi:TripsApi;
     const {agency, destination, places, start_date, end_date, flightPrice} = this.form.value;
     const id = this.getDashId(agency + "-" + destination);
     const newTripData = {id, agency, destination, places, start_date, end_date, flightPrice};
-    console.warn('Send trip data ', newTripData)
-this.tripApi.post(newTripData);
+    console.warn('Send trip data ', newTripData);
+//this.tripApi.post(newTripData);
+this.save.emit(newTripData);
+
   }
 
   private getDashId(str: string):string {
