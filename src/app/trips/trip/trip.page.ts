@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Trip } from 'src/app/core/api/trip.interface';
-import { Trips } from 'src/app/core/api/trips.api';
+import { TripsApi } from 'src/app/core/api/trips.api';
 
 
 @Component({
@@ -11,7 +11,12 @@ import { Trips } from 'src/app/core/api/trips.api';
 export class TripPage implements OnInit {
   public tripId = '';
   public trip?:Partial<Trip>;
-  constructor(private route: ActivatedRoute, tripApi:Trips) {
+
+  public reloading = false;
+  public tripApi: Partial<Trip>[]=[];
+
+
+  constructor(private route: ActivatedRoute, tripApi:TripsApi) {
     this.tripId = this.route.snapshot.paramMap.get('id') || '';
     this.trip=tripApi.getById(this.tripId);
 

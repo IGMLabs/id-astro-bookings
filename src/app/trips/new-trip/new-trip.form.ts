@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
-import { Trips } from 'src/app/core/api/trips.api';
+import { TripsApi } from 'src/app/core/api/trips.api';
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
@@ -23,11 +23,11 @@ import { Form } from 'src/app/core/forms/form.base';
 export class NewTripForm extends Form implements OnInit {
   public start_date = 0;
 public agencies:Agency[];
-private tripApi:Trips;
+private tripApi:TripsApi;
 
 
 
-  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService, private agenciesApi:AgenciesApi,  tripApi:Trips) {
+  constructor(formBuilder: FormBuilder, public fvs: FormValidationsService,  fms: FormMessagesService, public cms: CommonService, private agenciesApi:AgenciesApi,  tripApi:TripsApi) {
     super(fms);
     this.agencies=agenciesApi.getAll();
     this.tripApi=tripApi;

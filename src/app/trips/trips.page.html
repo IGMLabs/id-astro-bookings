@@ -1,2 +1,2 @@
 <a routerLink="trip/new">➕ Add a new Trip</a>
-<app-trips-list></app-trips-list>
+<app-trips-list [tripApi]="trips" (reload)="onReload()"></app-trips-list>

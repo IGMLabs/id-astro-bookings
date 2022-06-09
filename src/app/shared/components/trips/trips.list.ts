@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Trip } from 'src/app/core/api/trip.interface';
-import { Trips } from 'src/app/core/api/trips.api';
+import { TripsApi } from 'src/app/core/api/trips.api';
 
 @Component({
   selector: 'app-trips-list',
@@ -10,13 +10,18 @@ import { Trips } from 'src/app/core/api/trips.api';
 export class TripsList implements OnInit {
 
   public reloading = false;
-  public tripApi: Partial<Trip>[];
-  constructor(tripApi:Trips) {
+  @Input() public tripApi: Partial<Trip>[]=[];
+
+  @Output() private  reload=new EventEmitter();
+
+
+  constructor(tripApi:TripsApi) {
     this.tripApi=tripApi.getAll();
   }
-  public reload(list: string) {
+  public onReloadClick(list: string) {
     this.reloading = true;
     console.log('Reloading...' + list);
+    this.reload.emit();
   }
   public getClassForStatus(status: string |undefined) {
     if (status === 'Confirmed') {

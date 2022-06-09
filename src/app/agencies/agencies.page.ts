@@ -9,7 +9,9 @@ import { Agency } from '../core/api/agency.interface';
 })
 export class AgenciesPage implements OnInit {
   public agencies!:Agency[];
-  constructor(private agenciesApi:AgenciesApi) { this.agencies=agenciesApi.getAll();}
+  constructor(private agenciesApi:AgenciesApi) {
+    this.agencies=agenciesApi.getAll();
+  }
 onReload(){
   this.agencies=this.agenciesApi.getAll();
 }

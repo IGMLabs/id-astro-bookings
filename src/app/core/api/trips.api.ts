@@ -3,7 +3,7 @@ import { Trip } from "./trip.interface";
 @Injectable({
   providedIn:'root'
 })
-export class Trips {
+export class TripsApi {
 
   trips:Partial<Trip>[] = [
     {
