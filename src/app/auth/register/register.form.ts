@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { CommonService } from 'src/app/core/commons/common.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
-import { Form } from 'src/app/core/forms/form.base';
+import { FormBase } from 'src/app/core/forms/form.base';
 
 
 interface Register {
@@ -17,12 +17,10 @@ interface Register {
   templateUrl: './register.form.html',
   styleUrls: ['./register.form.css']
 })
-export class RegisterForm extends Form implements OnInit {
+export class RegisterForm extends FormBase implements OnInit {
 
-
-
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, public fvs: FormValidationsService, public cms: CommonService) {
-   super(fms);
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, fvs: FormValidationsService) {
+    super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -60,9 +58,5 @@ export class RegisterForm extends Form implements OnInit {
     if (errors['passwordMatch']) return errors['passWordMatch'];
     return '';
   }
-
-
-
-
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Trip } from '../core/api/trip.interface';
 import { TripsApi } from '../core/api/trips.api';
+import { catchError, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-trips',
@@ -8,17 +9,21 @@ import { TripsApi } from '../core/api/trips.api';
   styleUrls: ['./trips.page.css']
 })
 export class TripsPage implements OnInit {
-  public reloading = false;
-  public trips: Partial<Trip>[]=[];
-  constructor(private tripApi:TripsApi) {
 
-  this.trips=this.tripApi.getAll();
+  //public trips!: Trip[];
+  public trips$!: Observable<Trip[]>;
+  public error: boolean = false;
 
-   }
-   onReload(){
-    this.trips=this.tripApi.getAll();
+  constructor(private tripsApi: TripsApi) {
+    this.trips$ = this.tripsApi.getAll$();
   }
+
   ngOnInit(): void {
+  }
+
+  onReload() {
+    this.trips$ = this.tripsApi.getAll$();
+
   }
 
 }

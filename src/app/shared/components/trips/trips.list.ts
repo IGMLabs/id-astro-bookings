@@ -8,31 +8,29 @@ import { TripsApi } from 'src/app/core/api/trips.api';
   styleUrls: ['./trips.list.css'],
 })
 export class TripsList implements OnInit {
-
+  @Input() public trips: Trip[] = [];
+  @Output() private reload = new EventEmitter();
   public reloading = false;
-  @Input() public tripApi: Partial<Trip>[]=[];
 
-  @Output() private  reload=new EventEmitter();
-
-
-  constructor(tripApi:TripsApi) {
-    this.tripApi=tripApi.getAll();
+  public getTripsLength(){
+    return this.trips.length;
   }
+
   public onReloadClick(list: string) {
     this.reloading = true;
-    console.log('Reloading...' + list);
-    this.reload.emit();
+    this.reload.emit()
   }
-  public getClassForStatus(status: string |undefined) {
+
+  public getClassForStatus(status: string | undefined) {
     if (status === 'Confirmed') {
       return 'green';
     }
     return 'orange';
   }
 
-  public getClassForPlaces(places: number|undefined) {
+  public getClassForPlaces(places: number) {
     if (places === 0) return 'sold-out';
-    if (places!=undefined&&places < 8) return 'few-places';
+    if (places < 8) return 'few-places';
     return '';
   }
 

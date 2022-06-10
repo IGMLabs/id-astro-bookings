@@ -4,14 +4,12 @@ import { Agency } from 'src/app/core/api/agency.interface';
 @Component({
   selector: 'app-agency-view',
   templateUrl: './agency.view.html',
-  styleUrls: ['./agency.view.css']
+  styleUrls: ['./agency.view.css'],
 })
 export class AgencyView implements OnInit {
   @Input() public agencyId!: string;
-  @Input() public agency?: Agency;
-  constructor() { }
+  @Input() public agency!: Agency;
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

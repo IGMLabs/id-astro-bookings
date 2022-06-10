@@ -7,8 +7,10 @@ import { Trip } from 'src/app/core/api/trip.interface';
   styleUrls: ['./trip.view.css']
 })
 export class TripView implements OnInit {
-  @Input() public tripId!: string;
-  @Input() public trip?: Partial<Trip>;
+
+  @Input() public tripId! : string;
+  @Input() public trip?: Trip
+
   constructor() { }
 
   ngOnInit(): void {
