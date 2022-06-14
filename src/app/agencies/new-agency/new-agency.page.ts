@@ -24,7 +24,6 @@ export class NewAgencyPage implements OnInit {
   }
 
   onSave(newAgencyData:Agency){
-    console.log("hola");
     this.agenciesApi.post$(newAgencyData).subscribe(() => {});
   }
 

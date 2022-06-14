@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Booking } from 'src/app/core/components/api/booking.interface';
 import { BookingsApi } from 'src/app/core/components/api/bookings.api';
+import { Trip } from 'src/app/core/components/api/trip.interface';
+import { TripsApi } from 'src/app/core/components/api/trips.api';
 
 @Component({
   selector: 'app-new-booking-page',
@@ -10,7 +12,11 @@ import { BookingsApi } from 'src/app/core/components/api/bookings.api';
 })
 export class NewBookingPage implements OnInit {
 
-  constructor(private bookingsApi:BookingsApi, private router:Router) { }
+  public trips:Trip[]=[];
+
+  constructor(private bookingsApi:BookingsApi, private router:Router) {
+
+   }
 
   ngOnInit(): void {
   }

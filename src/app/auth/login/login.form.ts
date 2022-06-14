@@ -19,7 +19,7 @@ export class LoginForm implements OnInit {
     private fms: FormMessagesService) {
 
     this.form = formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl(''),
       password: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])
     });
 

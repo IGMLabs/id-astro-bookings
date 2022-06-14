@@ -1,14 +1,6 @@
 <form [formGroup]="form">
   <fieldset>
-    <!--<div>
-      <label for="id"> Booking id </label>
-      <input name="id"
-             id="id"
-             type="text"
-             formControlName="id"
-             [attr.aria-invalid]="hasError('id')">
-      <small *ngIf="mustShowMessage('id')">{{ getErrorMessage('id') }}</small>
-    </div>-->
+
     <div>
       <label for="tripId"> Trip Id </label>
       <select name="tripId"
@@ -24,8 +16,14 @@
       </select>
       <small *ngIf="mustShowMessage('range')">{{ getErrorMessage('range') }}</small>
     </div>
+    <app-template-control
+    [form]="form"
+    formControlName="passengerName"
+    label="passengerName"
+    placeholder="Passenger name">
 
-    <div>
+</app-template-control>
+    <!-- <div>
       <label for="passengerName"> Passenger Name </label>
       <input name="passengerName"
              id="passengerName"
@@ -33,8 +31,17 @@
              formControlName="passengerName"
              [attr.aria-invalid]="hasError('passengerName')">
       <small *ngIf="mustShowMessage('passengerName')">{{ getErrorMessage('passengerName') }}</small>
-    </div>
-    <div>
+    </div> -->
+
+    <app-template-control
+    [form]="form"
+    formControlName="date"
+    label="Date"
+    placeholder=""
+    inputType="date">
+</app-template-control>
+
+    <!-- <div>
       <label for="date"> Date </label>
       <input name="date"
              id="date"
@@ -42,8 +49,17 @@
              formControlName="date"
              [attr.aria-invalid]="hasError('date')">
       <small *ngIf="mustShowMessage('date')">{{ getErrorMessage('date') }}</small>
-    </div>
-    <div>
+    </div> -->
+
+    <app-template-control
+    [form]="form"
+    formControlName="luggageKilos"
+    label="luggageKilos"
+    placeholder="3"
+    inputType="number">
+</app-template-control>
+
+    <!-- <div>
       <label for="luggageKilos"> Luggage kilos </label>
       <input name="luggageKilos"
              id="luggageKilos"
@@ -51,7 +67,7 @@
              formControlName="luggageKilos"
              [attr.aria-invalid]="hasError('luggageKilos')">
       <small *ngIf="mustShowMessage('luggageKilos')">{{ getErrorMessage('luggageKilos') }}</small>
-    </div>
+    </div> -->
     <div>
       <input
         type="checkbox"
@@ -68,6 +84,6 @@
   <div>
     <button type="submit"
             (click)="onSubmitClick()"
-            [disabled]="form.invalid"> Send new agency data </button>
+            [disabled]="form.invalid"> Send new booking data </button>
   </div>
 </form>

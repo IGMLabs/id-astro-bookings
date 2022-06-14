@@ -1,5 +1,7 @@
 <form [formGroup]="form">
 
+  <app-email-control formControlName="email"></app-email-control>
+<!--
   <div>
     <label for="email">Email Address</label>
     <input
@@ -13,9 +15,15 @@
     <small *ngIf="mustShowMessage('email')"
       >{{ getErrorMessage('email') }}
     </small>
-  </div>
-
-  <div>
+  </div> -->
+  <app-template-control
+  [form]="form"
+  formControlName="password"
+  label="Password"
+  placeholder=""
+  inputType="password">
+</app-template-control>
+  <!-- <div>
     <label for="password">Password</label>
     <input
       type="password"
@@ -28,7 +36,7 @@
     <small *ngIf="mustShowMessage('password')"
       >{{ getErrorMessage('password') }}
     </small>
-  </div>
+  </div> -->
 
   <button [disabled]="form.invalid" (click)="onSave()">Save</button>
 

@@ -5,7 +5,6 @@ import { BookingsApi } from 'src/app/core/components/api/bookings.api';
 import { Trip } from 'src/app/core/components/api/trip.interface';
 import { TripsApi } from 'src/app/core/components/api/trips.api';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
-import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 
 @Component({
@@ -18,7 +17,6 @@ export class NewBookingForm extends FormBase implements OnInit {
   @Output() public save = new EventEmitter<Booking>();
   constructor(
     formBuilder: FormBuilder,
-    private fvs: FormValidationsService,
     fms: FormMessagesService,
     private tripsApi:TripsApi,
     private bookingsApi: BookingsApi
@@ -26,9 +24,8 @@ export class NewBookingForm extends FormBase implements OnInit {
     super(fms)
     this.form = formBuilder.group(
       {
-        //id: new FormControl('', [Validators.required, Validators.minLength(2)]),
         tripId: new FormControl('', [Validators.required]),
-        passengerName: new FormControl(),
+        passengerName: new FormControl('', Validators.required),
         date: new FormControl('', [Validators.required]),
         luggageKilos: new FormControl('', [Validators.required]),
         hasPremiumFoodPrice: new FormControl(false)

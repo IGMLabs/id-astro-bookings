@@ -15,7 +15,16 @@
       </select>
       <small *ngIf="mustShowMessage('agencyId')">{{ getErrorMessage('agencyId') }}</small>
     </div>
-    <div>
+
+    <app-template-control
+    [form]="form"
+    formControlName="destination"
+    label="Destination"
+    placeholder="">
+
+</app-template-control>
+
+    <!-- <div>
       <label for="destination"> Destination </label>
       <input name="destination"
              id="destination"
@@ -23,8 +32,19 @@
              formControlName="destination"
              [attr.aria-invalid]="hasError('destination')">
       <small *ngIf="mustShowMessage('destination')">{{ getErrorMessage('destination') }}</small>
-    </div>
-    <div>
+    </div> -->
+
+
+    <app-template-control
+      [form]="form"
+      formControlName="places"
+      label="Places"
+      placeholder="0"
+      inputType="number">
+
+  </app-template-control>
+
+    <!-- <div>
       <label for="places"> Places </label>
       <input name="places"
              id="places"
@@ -32,7 +52,7 @@
              formControlName="places"
              [attr.aria-invalid]="hasError('places')">
       <small *ngIf="mustShowMessage('places')">{{ getErrorMessage('places') }}</small>
-    </div>
+    </div> -->
     <div>
       <label for="startDate"> Start Date </label>
       <input name="startDate"

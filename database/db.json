@@ -10,20 +10,20 @@
       "hasPremiumFoodPrice": true
     },
     {
-      "id": "space-y-moon-12023-11-11",
-      "tripId": "space-y-moon-1",
+      "id": "space-y-mars-22026-06-06tomás",
+      "tripId": "space-y-mars-2",
       "passengerName": "Tomás",
-      "date": "2023-11-11",
-      "luggageKilos": 5,
-      "hasPremiumFoodPrice": true
+      "date": "2026-06-06",
+      "luggageKilos": 6,
+      "hasPremiumFoodPrice": false
     },
     {
-      "id": "green-origin-iss-42022-07-07william",
-      "tripId": "green-origin-iss-4",
-      "passengerName": "William",
-      "date": "2022-07-07",
-      "luggageKilos": 7,
-      "hasPremiumFoodPrice": true
+      "id": "--trip12022-11-11tomás",
+      "tripId": "--trip1",
+      "passengerName": "Tomás",
+      "date": "2022-11-11",
+      "luggageKilos": "3",
+      "hasPremiumFoodPrice": false
     }
   ],
   "agencies": [
@@ -49,6 +49,24 @@
       "id": "prueba",
       "name": "Prueba",
       "range": "Orbital",
+      "status": "Active"
+    },
+    {
+      "id": "prueba2",
+      "name": "prueba2",
+      "range": "Interplanetary",
+      "status": "Active"
+    },
+    {
+      "id": "asdf",
+      "name": "asdf",
+      "range": "Interplanetary",
+      "status": "Active"
+    },
+    {
+      "id": "pruebaasdf",
+      "name": "pruebaASDF",
+      "range": "Interstellar",
       "status": "Active"
     }
   ],
@@ -119,6 +137,22 @@
       "destination": "Prueba",
       "places": 4,
       "flightPrice": 5000000
+    },
+    {
+      "id": "asdf",
+      "destination": "asdf",
+      "agencyId": "prueba2",
+      "places": 1,
+      "startDate": "2025-05-05",
+      "endDate": "2026-06-06"
+    },
+    {
+      "id": "--trip1",
+      "destination": "--trip1",
+      "agencyId": "prueba",
+      "places": 1,
+      "startDate": "2022-09-09",
+      "endDate": "2023-09-10"
     }
   ]
 }
