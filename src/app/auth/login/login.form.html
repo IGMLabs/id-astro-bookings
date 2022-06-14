@@ -1,7 +1,6 @@
 <form [formGroup]="form">
-
   <app-email-control formControlName="email"></app-email-control>
-<!--
+  <!--
   <div>
     <label for="email">Email Address</label>
     <input
@@ -17,12 +16,13 @@
     </small>
   </div> -->
   <app-template-control
-  [form]="form"
-  formControlName="password"
-  label="Password"
-  placeholder=""
-  inputType="password">
-</app-template-control>
+    [form]="form"
+    formControlName="password"
+    label="Password"
+    placeholder=""
+    inputType="password"
+  >
+  </app-template-control>
   <!-- <div>
     <label for="password">Password</label>
     <input
@@ -39,5 +39,4 @@
   </div> -->
 
   <button [disabled]="form.invalid" (click)="onSave()">Save</button>
-
 </form>

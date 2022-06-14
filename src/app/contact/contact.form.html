@@ -1,23 +1,25 @@
 <form [formGroup]="form">
-
   <app-template-control
-      [form]="form"
-      formControlName="name"
-      label="Name"
-      placeholder="Your name">
-
+    [form]="form"
+    formControlName="name"
+    label="Name"
+    placeholder="Your name"
+  >
   </app-template-control>
-<app-email-control formControlName="email"></app-email-control>
+  <app-email-control formControlName="email"></app-email-control>
 
   <div>
     <label for="message">Message</label>
-    <textarea id="message"
-              name="message"
-              formControlName="message"
-              placeholder="Your message"
-              [attr.aria-invalid]="hasError('message')"></textarea>
-    <small *ngIf="mustShowMessage('message')">{{ getErrorMessage('message') }} </small>
+    <textarea
+      id="message"
+      name="message"
+      formControlName="message"
+      placeholder="Your message"
+      [attr.aria-invalid]="hasError('message')"
+    ></textarea>
+    <small *ngIf="mustShowMessage('message')"
+      >{{ getErrorMessage('message') }}
+    </small>
   </div>
-  <button [disabled]="form.invalid"
-          (click)="onSave()">Save</button>
+  <button [disabled]="form.invalid" (click)="onSave()">Save</button>
 </form>

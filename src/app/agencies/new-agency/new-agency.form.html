@@ -1,57 +1,59 @@
 <form [formGroup]="form">
   <fieldset>
-<app-template-control
+    <app-template-control
       [form]="form"
       formControlName="name"
       label="Name"
-      placeholder="Your name">
+      placeholder="Your name"
+    >
+    </app-template-control>
 
-  </app-template-control>
-
-  <app-template-control
-  [form]="form"
-  formControlName="range"
-  label="Range"
-  inputType="number"
-  placeholder="5">
-
-</app-template-control>
+    <app-template-control
+      [form]="form"
+      formControlName="range"
+      label="Range"
+      inputType="number"
+      placeholder="5"
+    >
+    </app-template-control>
 
     <div>
       <label for="range"> Operation range </label>
-      <select name="range"
-              id="range"
-              formControlName="range"
-              [attr.aria-invalid]="hasError('range')">
-        <option selected
-                value="">Select a range</option>
-        <option *ngFor="let range of ranges"
-                [value]="range.id">
+      <select
+        name="range"
+        id="range"
+        formControlName="range"
+        [attr.aria-invalid]="hasError('range')"
+      >
+        <option selected value="">Select a range</option>
+        <option *ngFor="let range of ranges" [value]="range.id">
           {{ range.name }}
         </option>
       </select>
-      <small *ngIf="mustShowMessage('range')">{{ getErrorMessage('range') }}</small>
+      <small *ngIf="mustShowMessage('range')"
+        >{{ getErrorMessage('range') }}</small
+      >
     </div>
-
-
 
     <div>
       <label for="status"> Operative status </label>
       <ng-container *ngFor="let status of statuses">
         <label for="status-{{status}}">
-          <input name="status"
-                 type="radio"
-                 id="status-{{status}}"
-                 formControlName="status"
-                 [value]="status">
+          <input
+            name="status"
+            type="radio"
+            id="status-{{status}}"
+            formControlName="status"
+            [value]="status"
+          />
           {{ status }}
         </label>
       </ng-container>
     </div>
   </fieldset>
   <div>
-    <button type="submit"
-            (click)="onSubmitClick()"
-            [disabled]="form.invalid"> Send new agency data </button>
+    <button type="submit" (click)="onSubmitClick()" [disabled]="form.invalid">
+      Send new agency data
+    </button>
   </div>
 </form>

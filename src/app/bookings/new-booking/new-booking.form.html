@@ -1,28 +1,29 @@
 <form [formGroup]="form">
   <fieldset>
-
     <div>
       <label for="tripId"> Trip Id </label>
-      <select name="tripId"
-              id="tripId"
-              formControlName="tripId"
-              [attr.aria-invalid]="hasError('tripId')">
-        <option selected
-                value="">Select a trip id</option>
-        <option *ngFor="let trip of trips"
-                [value]="trip.id">
+      <select
+        name="tripId"
+        id="tripId"
+        formControlName="tripId"
+        [attr.aria-invalid]="hasError('tripId')"
+      >
+        <option selected value="">Select a trip id</option>
+        <option *ngFor="let trip of trips" [value]="trip.id">
           {{ trip.id }}
         </option>
       </select>
-      <small *ngIf="mustShowMessage('range')">{{ getErrorMessage('range') }}</small>
+      <small *ngIf="mustShowMessage('range')"
+        >{{ getErrorMessage('range') }}</small
+      >
     </div>
     <app-template-control
-    [form]="form"
-    formControlName="passengerName"
-    label="passengerName"
-    placeholder="Passenger name">
-
-</app-template-control>
+      [form]="form"
+      formControlName="passengerName"
+      label="passengerName"
+      placeholder="Passenger name"
+    >
+    </app-template-control>
     <!-- <div>
       <label for="passengerName"> Passenger Name </label>
       <input name="passengerName"
@@ -34,12 +35,13 @@
     </div> -->
 
     <app-template-control
-    [form]="form"
-    formControlName="date"
-    label="Date"
-    placeholder=""
-    inputType="date">
-</app-template-control>
+      [form]="form"
+      formControlName="date"
+      label="Date"
+      placeholder=""
+      inputType="date"
+    >
+    </app-template-control>
 
     <!-- <div>
       <label for="date"> Date </label>
@@ -52,12 +54,13 @@
     </div> -->
 
     <app-template-control
-    [form]="form"
-    formControlName="luggageKilos"
-    label="luggageKilos"
-    placeholder="3"
-    inputType="number">
-</app-template-control>
+      [form]="form"
+      formControlName="luggageKilos"
+      label="luggageKilos"
+      placeholder="3"
+      inputType="number"
+    >
+    </app-template-control>
 
     <!-- <div>
       <label for="luggageKilos"> Luggage kilos </label>
@@ -74,16 +77,13 @@
         id="hasPremiumFoodPrice"
         name="hasPremiumFoodPrice"
         formControlName="hasPremiumFoodPrice"
-
-        />
+      />
       <label for="hasPremiumFood">Do you want premium food?</label>
     </div>
-
-
   </fieldset>
   <div>
-    <button type="submit"
-            (click)="onSubmitClick()"
-            [disabled]="form.invalid"> Send new booking data </button>
+    <button type="submit" (click)="onSubmitClick()" [disabled]="form.invalid">
+      Send new booking data
+    </button>
   </div>
 </form>

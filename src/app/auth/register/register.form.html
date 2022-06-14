@@ -1,11 +1,11 @@
 <form [formGroup]="form">
   <app-template-control
-  [form]="form"
-  formControlName="name"
-  label="Name"
-  placeholder="Your name">
-
-</app-template-control>
+    [form]="form"
+    formControlName="name"
+    label="Name"
+    placeholder="Your name"
+  >
+  </app-template-control>
   <!-- <div>
     <label for="name">Name</label>
     <input
@@ -65,7 +65,5 @@
     <small>{{ getPasswordMatchMessage() }}</small>
   </div>
 
-
   <button [disabled]="form.invalid" (click)="onSave()">Save</button>
-
 </form>
