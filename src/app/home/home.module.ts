@@ -5,12 +5,14 @@ import { SharedModule } from '../shared/shared.module';
 
 
 
+
 @NgModule({
   declarations: [
     HomePage
   ],
   imports: [
-    CommonModule, SharedModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     HomePage

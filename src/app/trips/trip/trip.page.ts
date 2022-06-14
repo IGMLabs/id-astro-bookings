@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Trip } from 'src/app/core/api/trip.interface';
-import { TripsApi } from 'src/app/core/api/trips.api';
+import { TripsApi } from '../../core/components/api/trips.api';
+import { Trip } from '../../core/components/api/trip.interface';
+import { Observable } from 'rxjs';
 
 @Component({
+  selector: 'app-trip',
   templateUrl: './trip.page.html',
-  styleUrls: ['./trip.page.css'],
+  styleUrls: ['./trip.page.css']
 })
 export class TripPage implements OnInit {
-  public tripId = '';
-  public trip?: Trip;
-  constructor(private route: ActivatedRoute, private tripsApi: TripsApi) {}
+
+  public tripId: string;
+  public trips$ : Observable<Trip>;
+
+  constructor(route: ActivatedRoute,tripApi:TripsApi) {
+    this.tripId = route.snapshot.paramMap.get('id') || '';
+    this.trips$ = tripApi.getById$(this.tripId);
+  }
+
 
   ngOnInit(): void {
-    this.tripId = this.route.snapshot.paramMap.get('id') || '';
-    this.tripsApi.getById(this.tripId).subscribe((data) => {
-      this.trip = data;
-    });
   }
+
 }

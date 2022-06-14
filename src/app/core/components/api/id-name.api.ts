@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { IdName } from './id-name.interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class IdNameApi {
+
   private ranges: IdName[] = [
     { id: 'Orbital', name: '🌎 Orbiting around the earth' },
     {

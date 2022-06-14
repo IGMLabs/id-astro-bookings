@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommonService } from '../core/commons/common.service';
-import { FormMessagesService } from '../core/forms/form-messages.service';
 import { FormValidationsService } from '../core/forms/form-validations.service';
+import { FormUtilityService } from '../core/forms/form-utility.service';
+import { FormMessagesService } from '../core/forms/form-messages.service';
 import { FormBase } from '../core/forms/form.base';
 
+
 interface Contact {
-  name:string,
-  email:string,
+  name: string;
+  email: string;
   message: string;
 }
+
 
 @Component({
   selector: 'app-contact-form',
@@ -19,26 +21,27 @@ interface Contact {
 export class ContactForm extends FormBase implements OnInit {
 
 
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, fvs: FormValidationsService) {
-    super(fms);
+  constructor(
+    formBuilder: FormBuilder,
+    fvs: FormValidationsService,
+    public fus: FormUtilityService,
+    fms: FormMessagesService
+    ){
+    super(fms)
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      message: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50),
-      ]),
+      message: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)])
     });
   }
 
   ngOnInit(): void {
   }
 
+
   public onSave() {
     const contact = this.form.value;
-    console.warn('Send Contact message', contact);
+    console.warn('Send contact message', contact);
   }
-
 
 }

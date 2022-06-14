@@ -1,15 +1,19 @@
 <article>
-  <h3> Working with {{ getAgenciesLength() }} agencies </h3>
+  <h3>Working with {{ getAgenciesLength() }} agencies</h3>
   <ul>
     <li *ngFor="let agency of agencies">
-      <a [routerLink]="['/','agencies','agency',agency.id ]"
-         [ngClass]="agency.status | lowercase">{{ agency.name }}</a>
-      <ng-container *ngIf="agency.range==='Interplanetary' then interplanetary; else orbital  ">
+      <a [routerLink]="['/','agencies','agency',agency.id]" [ngClass]="agency.status">{{ agency.name }}</a>
+      <ng-container
+        *ngIf="
+          agency.range === 'Interplanetary';
+          then interplanetary;
+          else orbital
+        "
+      >
       </ng-container>
-      <ng-template #interplanetary> 💫 </ng-template>
-      <ng-template #orbital> 🌎 </ng-template>
+      <ng-template #interplanetary>🪐</ng-template>
+      <ng-template #orbital>🌍</ng-template>
     </li>
   </ul>
-  <button (click)="onReloadClick('agencies')"> ♻️ </button>
+  <button (click)="onReloadClick()">Reload</button>
 </article>
-<app-reloading *ngIf="reloading"></app-reloading>

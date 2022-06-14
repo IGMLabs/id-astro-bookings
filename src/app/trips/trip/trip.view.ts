@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Trip } from 'src/app/core/api/trip.interface';
+import { Component, OnInit, Input } from '@angular/core';
+import { Trip } from '../../core/components/api/trip.interface';
 
 @Component({
   selector: 'app-trip-view',
@@ -8,8 +8,8 @@ import { Trip } from 'src/app/core/api/trip.interface';
 })
 export class TripView implements OnInit {
 
-  @Input() public tripId! : string;
-  @Input() public trip?: Trip
+  @Input()  public tripId!:string;
+  @Input() public trip?: Trip;
 
   constructor() { }
 

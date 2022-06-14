@@ -1,42 +1,32 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AgenciesApi } from '../core/api/agencies.api';
-import { Agency } from '../core/api/agency.interface';
-import { Trip } from '../core/api/trip.interface';
-import { TripsApi } from '../core/api/trips.api';
+import { AgenciesApi } from '../core/components/api/agencies.api';
+import { TripsApi } from '../core/components/api/trips.api';
+import { Trip } from '../core/components/api/trip.interface';
+import { Agency } from '../core/components/api/agency.interface';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.css'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class HomePage implements OnInit {
 
-  public trips!: Trip[];
-  public agencies!: Agency[];
-  public error:boolean=false;
-  constructor(tripsApi: TripsApi,private agenciesApi: AgenciesApi) {
-    tripsApi.getAll$().subscribe((data) => {
-      this.trips = data;
-    });
-    agenciesApi.getAll$().subscribe((data) => {
-      this.agencies = data;
-    });
-   }
+  public trips$: Observable<Trip[]>;
+  public agencies$: Observable<Agency[]>;
 
-  ngOnInit(): void {
+  constructor(tripsApi: TripsApi, agencyApi: AgenciesApi) {
+    this.trips$ = tripsApi.getAll$();
+    this.agencies$ = agencyApi.getAll$();
   }
 
-  onReload() {
-    this.agenciesApi.getAll$().subscribe(
-      ( data ) => {
-      //this.agencies = data;
-      },
-      ( err ) => {
-        console.log('Fallo', err.message);
-        this.error = true;
-      }
+  public reloading = false;
 
-    );
+  public reload() {
+    this.reloading = true;
+  }
+  ngOnInit(): void {
   }
 
 }

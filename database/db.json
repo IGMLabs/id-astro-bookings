@@ -1,6 +1,31 @@
 {
   "users": [],
-  "bookings": [],
+  "bookings": [
+    {
+      "id": "asdfg",
+      "tripId": "space-y",
+      "passengerName": "Tommy",
+      "date": "2023-02-01",
+      "luggageKilos": 5,
+      "hasPremiumFoodPrice": true
+    },
+    {
+      "id": "space-y-moon-12023-11-11",
+      "tripId": "space-y-moon-1",
+      "passengerName": "Tomás",
+      "date": "2023-11-11",
+      "luggageKilos": 5,
+      "hasPremiumFoodPrice": true
+    },
+    {
+      "id": "green-origin-iss-42022-07-07william",
+      "tripId": "green-origin-iss-4",
+      "passengerName": "William",
+      "date": "2022-07-07",
+      "luggageKilos": 7,
+      "hasPremiumFoodPrice": true
+    }
+  ],
   "agencies": [
     {
       "id": "space-y",

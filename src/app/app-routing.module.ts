@@ -1,11 +1,11 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage,
+    component: HomePage
   },
   {
     path: 'about',
@@ -29,9 +29,9 @@ const routes: Routes = [
   },
   {
     path: 'trips',
-     loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule)
+    loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule)
   },
-
+  { path: 'bookings', loadChildren: () => import('./bookings/bookings.module').then(m => m.BookingsModule) }
 ];
 
 @NgModule({

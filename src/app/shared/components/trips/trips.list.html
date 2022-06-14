@@ -1,18 +1,19 @@
 <article>
-  <h3>Offering {{ getTripsLength() }} trips</h3>
+  <h3>Viajes {{ getTripsLength() }}</h3>
   <ul>
     <li *ngFor="let trip of trips">
-      <a [routerLink]="['/','trips','trip', trip.id]"
-      [ngClass]="getClassForStatus(trip.status)">{{ trip.destination }}</a>
-      <span> 💸 {{ trip.flightPrice | currency }}</span>
-      <span> ⤴️ {{ trip.startDate | date:'yyyy-MMM-dd' }}</span>
-      <span> ⤵️ {{ trip.endDate | date:'yyyy-MMM-dd' }}</span>
-      <span [ngClass]="getClassForPlaces(trip.places)"> 🧑🏼‍🚀 {{ trip.places }}</span>
-      <ng-container *ngIf="trip.kind==='WithStay' then withStay; else tripOnly"></ng-container>
-      <ng-template #withStay> 🧳 </ng-template>
-      <ng-template #tripOnly> 🧑🏼‍🚀 </ng-template>
+      <a [routerLink]="['/','trips','trip',trip.id]">{{ trip.id }}</a>
+      <span>{{ trip.id }}</span>
+      <ng-container
+        *ngIf="trip.kind === 'WithStay'; then withStay; else tripOnly"
+      >
+      </ng-container>
+      <ng-template #withStay>🛏️</ng-template>
+      <ng-template #tripOnly>🚀</ng-template>
+      <span [ngClass]="trip.status! | lowercase">{{ trip.status }}</span>
+      <span>{{ trip.extraLuggagePricePerKilo }}</span>
+      <span>{{ trip.premiumFoodPrice }}</span>
     </li>
   </ul>
-  <button (click)="onReloadClick('trips')"> ♻️ </button>
+  <button (click)="onReloadClick()">Reload</button>
 </article>
-<app-reloading *ngIf="reloading"></app-reloading>

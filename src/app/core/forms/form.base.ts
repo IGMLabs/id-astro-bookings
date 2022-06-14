@@ -1,12 +1,11 @@
-import { AbstractControl, FormGroup } from "@angular/forms";
-import { FormMessagesService } from "./form-messages.service";
+import { FormGroup } from '@angular/forms';
+import { FormMessagesService } from './form-messages.service';
+
 
 export class FormBase {
   public form!: FormGroup;
 
-  constructor(public fms: FormMessagesService) {
-
-  }
+  constructor(private fms: FormMessagesService) { }
 
   public hasError(controlName: string): boolean {
     return this.fms.hasError(this.form, controlName);
@@ -20,9 +19,10 @@ export class FormBase {
     return this.fms.getErrorMessage(this.form, controlName);
   }
 
-  protected getControl(controlName: string): AbstractControl | null {
-    return this.form.get(controlName);
+  public getDatesRangeMessage() {
+    return this.fms.getDatesRangeMessage(this.form);
   }
+
 
 
 }

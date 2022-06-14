@@ -6,7 +6,7 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class FormValidationsService {
 
-  constructor() { }
+  constructor() {}
 
   public passwordMatch(form: AbstractControl): ValidationErrors | null {
     const password = form.get('password');
@@ -18,36 +18,27 @@ export class FormValidationsService {
     }
     if (password.value !== confirmPassword.value) {
       return {
-        passwordMatch: 'Passwords don`t match',
+        passwordMatch: 'Passwords don´t match!',
       };
     }
     return null;
   }
 
-  public compareDates(form: AbstractControl) : ValidationErrors | null {
-    const start = form.get('start_date')?.value;
-    const end = form.get('end_date')?.value;
-    if (!start || !end) {
+  public datesRange(form: AbstractControl): ValidationErrors | null {
+    const startDate = form.get('startDate');
+    const endDate = form.get('endDate');
+    if (!startDate || !endDate) {
       return {
-        compareDates: 'No dates provided'
+        datesRange: 'No dates provided',
       };
     }
-    const start_date = new Date(start);
-    const end_date = new Date(end);
-    const today = new Date();
-
-    if (today > start_date){
+    if (startDate.value > endDate.value) {
       return {
-        compareDates: "You can't travel to the past"
+        datesRange: 'Dates are not in a range',
       };
     }
-    if (end_date < start_date){
-      return {
-        compareDates: "Travel to the past it's not posible yet"
-      };
-    }
-
     return null;
   }
+
 
 }

@@ -1,0 +1,7 @@
+<a routerLink="booking/new">Book a trip</a>
+<app-bookings-list *ngIf="( bookings$ | async ) as bookings"
+                    [bookings]="bookings"
+                    (reload)="onReload()"></app-bookings-list>
+
+
+

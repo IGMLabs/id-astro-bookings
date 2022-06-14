@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
+  public title = 'Astro Bookings';
   public subtitle = 'Welcome on board';
-  public author = 'Iván Doce';
   public authorUrl = 'https://www.google.es';
+  public author = 'Iván Doce';
   constructor() { }
 
   ngOnInit(): void {

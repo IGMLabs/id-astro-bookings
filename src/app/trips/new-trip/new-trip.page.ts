@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AgenciesApi } from 'src/app/core/api/agencies.api';
-import { Agency } from 'src/app/core/api/agency.interface';
-import { Trip } from 'src/app/core/api/trip.interface';
-import { TripsApi } from 'src/app/core/api/trips.api';
+import { Agency } from '../../core/components/api/agency.interface';
+import { TripsApi } from '../../core/components/api/trips.api';
+import { AgenciesApi } from '../../core/components/api/agencies.api';
+import { Trip } from '../../core/components/api/trip.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-trip',
@@ -12,21 +12,17 @@ import { TripsApi } from 'src/app/core/api/trips.api';
 })
 export class NewTripPage implements OnInit {
 
-  public agencies: Agency[]=[];
+  public agencies$ : Observable<Agency[]>;
 
-  constructor(agenciesApi: AgenciesApi, private tripsApi: TripsApi, private router: Router) {
-    agenciesApi.getAll$().subscribe((data) => {
-      this.agencies = data;
-    });
+  constructor(private tripsApi : TripsApi,agencyApi : AgenciesApi) {
+    this.agencies$ = agencyApi.getAll$();
   }
 
   ngOnInit(): void {
   }
 
-  onSave(newTripData: Trip){
-    this.tripsApi.post(newTripData).subscribe(() => {
-      this.router.navigate(['/trips']);
-    });
+  onSave(newAgencyData:Trip){
+    this.tripsApi.post$(newAgencyData).subscribe();
   }
 
 }

@@ -1,25 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Agency } from 'src/app/core/api/agency.interface';
+import { Agency } from 'src/app/core/components/api/agency.interface';
 
 @Component({
   selector: 'app-agencies-list',
   templateUrl: './agencies.list.html',
-  styleUrls: ['./agencies.list.css'],
+  styleUrls: ['./agencies.list.css']
 })
 export class AgenciesList implements OnInit {
-  @Input() public agencies: Agency[] = [];
+
+  @Input() public agencies: Agency[]=[];
   @Output() private reload = new EventEmitter();
 
-  public reloading = false;
+  constructor() { }
 
-  public onReloadClick(list: string) {
-    this.reloading = true;
-    console.log('Reloading...' + list);
-    this.reload.emit();
-  }
+  ngOnInit(): void { }
+
   public getAgenciesLength() {
     return this.agencies.length;
   }
 
-  ngOnInit(): void {}
+  public onReloadClick() {
+    this.reload.emit();
+  }
+
+
 }

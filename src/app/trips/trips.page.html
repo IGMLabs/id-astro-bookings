@@ -1,10 +1,2 @@
-<a routerLink="trip/new">➕ Add a new Trip</a>
-<app-trips-list *ngIf="(trips$ | async) as trips; else waiting"
- [trips]="trips"
-(reload)="onReload()">
-  </app-trips-list>
-
-<ng-template #waiting>
-    <h4>Waiting.....</h4>
-</ng-template>
-<h4 *ngIf="error">Ha habido un error</h4>
+<a routerLink="trip/new">Add a new trip</a>
+<app-trips-list *ngIf="(trips$ | async) as trips " [trips]="trips" (reload)="onReload()"></app-trips-list>

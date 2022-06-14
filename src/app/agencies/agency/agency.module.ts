@@ -7,8 +7,9 @@ import { AgencyView } from './agency.view';
 
 
 @NgModule({
-  declarations: [ 
-    AgencyPage, AgencyView
+  declarations: [
+    AgencyPage,
+    AgencyView
   ],
   imports: [
     CommonModule,
