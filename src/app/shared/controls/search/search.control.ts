@@ -12,18 +12,20 @@ export class SearchControl implements OnInit {
 
   @Output() search=new EventEmitter<string>();
 
-  public searchInput$!: Observable<string>;
+  //public searchInput$!: Observable<string>;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.searchInput$=fromEvent(this.searchInput.nativeElement,'keyup')
+   const nativeSource$=fromEvent(this.searchInput.nativeElement,'keyup');
+                            //this.searchInput$=
+                            nativeSource$
                             .pipe(map(( event)=> (event as any).target.value ),
                             tap((searchTerm)=> console.log(searchTerm)),
-                            debounceTime(1000),
+                            debounceTime(500),
                             filter((searchText)=>searchText.length>2 ),
                             distinctUntilChanged(),tap((searchTerm)=>this.search.emit(searchTerm))
-                            )
+                            ).subscribe();
   }
 
 }

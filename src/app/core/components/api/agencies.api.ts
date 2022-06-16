@@ -3,6 +3,7 @@ import { Agency } from './agency.interface';
 import { HttpClient } from '@angular/common/http'
 import { CrudApi } from './crud.api';
 import { StatusStore } from './status.store';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,4 +12,10 @@ export class AgenciesApi extends CrudApi<Agency> {
   constructor(http: HttpClient,statusStore:StatusStore) {
     super(http, 'agencies',statusStore);
   }
+
+  public getByText$(text: string | null): Observable<Agency[]> {
+    if (text === null || text == '') return this.getAll$();
+    return this.http.get<Agency[]>(this.url + '?q=' + text); // .pipe(delay(3000));
+  }
+
 }

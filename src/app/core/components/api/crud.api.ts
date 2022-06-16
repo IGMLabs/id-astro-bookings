@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { tap, catchError, of, pipe } from 'rxjs';
+import { tap, catchError, of, pipe, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StatusStore } from './status.store';
 
 export abstract class CrudApi<ApiType> {
-  private url = environment.apiUrl + this.endPoint + '/';
+  public url = environment.apiUrl + this.endPoint + '/';
 
   private statusPipe = pipe(
     tap(() => this.notifyIdle()),
@@ -14,7 +14,7 @@ export abstract class CrudApi<ApiType> {
     })
   )
 
-  constructor(private http: HttpClient, private endPoint: string, protected statusStore: StatusStore) { }
+  constructor(public http: HttpClient, private endPoint: string, protected statusStore: StatusStore) { }
 
   public getAll$() {
     this.notifyWorking();
@@ -52,6 +52,19 @@ export abstract class CrudApi<ApiType> {
   private notifyError(message: string) {
     this.statusStore.setState({ isWorking: false, errorMessage: message });
   }
+
+
+  // public getByIdb$(id: string) {
+  //   this.notifyWorking();
+  //   if (id === null || id == '') return null;
+  //   return this.http.get<ApiType>(this.url + id).pipe(this.statusPipe);
+  // }
+
+  // public getByText$(text: string | null): Observable<ApiType[]> {
+  //   if (text === null || text == '') return this.getAll$();
+  //   return this.http.get<ApiType[]>(this.url + '?q=' + text); // .pipe(delay(3000));
+  // }
+
 
 
 }

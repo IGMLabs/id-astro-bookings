@@ -2,6 +2,8 @@
   <h3>Working with {{ getAgenciesLength() }} agencies</h3>
   <ul>
     <li *ngFor="let agency of agencies">
+      <a [routerLink]="['.']" [queryParams]="{ q: agency.id }">🚀</a>
+      <span (click)="OnSearchClick(agency.id)">🛰️</span>
       <a [routerLink]="['/','agencies','agency',agency.id]" [ngClass]="agency.status">{{ agency.name }}</a>
       <ng-container
         *ngIf="

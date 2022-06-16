@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripsApi } from '../core/components/api/trips.api';
 import { Trip } from '../core/components/api/trip.interface';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-trips-page',
@@ -12,11 +12,14 @@ import { Observable } from 'rxjs';
 export class TripsPage implements OnInit {
 
   public trips$: Observable<Trip[]>;
-
+  private search$: BehaviorSubject<string>=new BehaviorSubject('');
 
   constructor( private tripsApi: TripsApi) {
-    this.trips$ = tripsApi.getAll$();
+    this.trips$ = this.search$.pipe(
+      switchMap((searchTerm) => this.tripsApi.getByText$(searchTerm))
+    );
   }
+
 
   onReload(){
     this.trips$ = this.tripsApi.getAll$();
@@ -24,5 +27,8 @@ export class TripsPage implements OnInit {
 
   ngOnInit(): void {
   }
-
+  onSearch(searchTerm:string){
+    this.search$.next(searchTerm);
+    //this.agencies$ = this.agenciesApi.getByText$(searchTerm)
+  }
 }

@@ -21,7 +21,7 @@
     </small>
   </div> -->
 
-  <app-email-control formControlName="email="></app-email-control>
+  <app-email-control formControlName="email"></app-email-control>
 
   <div>
     <label for="password">Password</label>
@@ -65,5 +65,5 @@
     <small>{{ getPasswordMatchMessage() }}</small>
   </div>
 
-  <button [disabled]="form.invalid" (click)="onSave()">Save</button>
+  <button [disabled]="form.invalid" (click)="onSubmitClick()">Save</button>
 </form>

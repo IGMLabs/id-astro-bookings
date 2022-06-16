@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
+import { Register } from '../api/interfaces/register.interface';
 
 @Component({
   selector: 'app-register-form',
@@ -11,6 +12,8 @@ import { FormMessagesService } from '../../core/forms/form-messages.service';
 })
 export class RegisterForm implements OnInit {
   public form: FormGroup;
+  @Output() public save = new EventEmitter<Register>();
+
 
   constructor(formBuilder: FormBuilder,fvs: FormValidationsService, public fus: FormUtilityService, public fms: FormMessagesService) {
 
@@ -51,6 +54,13 @@ export class RegisterForm implements OnInit {
     const { name, email, password } = this.form.value;
     const register = { name, email, password };
     console.warn('Send register',register);
+  }
+
+  public onSubmitClick() {
+    const { name, email, password } = this.form.value;
+    const newRegistry = { name,  email:email.email, password };
+    console.log(newRegistry);
+    this.save.emit(newRegistry);
   }
 
 }

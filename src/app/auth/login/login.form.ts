@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormMessagesService } from '../../core/forms/form-messages.service';
 import { FormUtilityService } from '../../core/forms/form-utility.service';
 import { FormValidationsService } from '../../core/forms/form-validations.service';
+import { Login } from '../api/interfaces/login.interface';
 
 @Component({
   selector: 'app-login-form',
@@ -11,6 +12,7 @@ import { FormValidationsService } from '../../core/forms/form-validations.servic
 })
 export class LoginForm implements OnInit {
   public form: FormGroup;
+  @Output() public save = new EventEmitter<Login>();
 
   constructor(
     formBuilder: FormBuilder,
@@ -44,8 +46,13 @@ export class LoginForm implements OnInit {
 
   public onSave() {
     const { email, password } = this.form.value;
-    const register = { email, password };
-    console.warn('Send register', register);
+    const login = { email, password };
+    console.warn('Send login', login);
   }
-
+  public onSubmitClick() {
+    const { email, password } = this.form.value;
+    const login = { email:email.email, password };
+    console.warn('Send login', login);
+    this.save.emit(login);
+  }
 }
