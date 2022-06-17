@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthApi } from '../api/auth.api';
+import { AuthAPI } from '../api/auth.api';
 import { Register } from '../api/interfaces/register.interface';
 
 @Component({
@@ -9,12 +9,12 @@ import { Register } from '../api/interfaces/register.interface';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private authApi:AuthApi<Register>) { }
+  constructor(private authApi:AuthAPI) { }
 
   ngOnInit(): void {
   }
 
   onSave(newRegistry:Register){
-    this.authApi.post$(newRegistry).subscribe(() => {});
+    this.authApi.register$(newRegistry).subscribe(() => {});
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthApi } from '../api/auth.api';
+import { AuthAPI } from '../api/auth.api';
 import { Login } from '../api/interfaces/login.interface';
 import { Register } from '../api/interfaces/register.interface';
 
@@ -10,12 +10,12 @@ import { Register } from '../api/interfaces/register.interface';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authApi:AuthApi<Register>) { }
+  constructor(private authApi:AuthAPI) { }
 
   ngOnInit(): void {
   }
   onSave(newLogin:Login){
-    this.authApi.post2$(newLogin).subscribe(() => {});
+    this.authApi.login$(newLogin).subscribe(() => {});
   }
 }
 

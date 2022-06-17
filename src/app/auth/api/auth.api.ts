@@ -1,46 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, of, pipe, tap } from 'rxjs';
-import { StatusStore } from 'src/app/core/components/api/status.store';
+import { tap } from 'rxjs';
+import { StorageBase } from 'src/app/core/utils/storage.base';
 import { environment } from 'src/environments/environment';
+import { AuthResponse } from './interfaces/auth.response.interface';
+import { Login } from './interfaces/login.interface';
+import { Register } from './interfaces/register.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export abstract class AuthApi<ApiType> {
-  private endPoint:string="register";
-  public url = environment.apiUrl + this.endPoint + '/';
+export class AuthAPI {
+  private url = environment.apiUrl;
 
-public accessToken='';
+  public accessToken = '';
 
-  private statusPipe = pipe(
-    tap(() => this.notifyIdle()),
-    catchError((err) => {
-      this.notifyError(err.message)
-      return of(err)
-    })
-  )
-  constructor(public http: HttpClient,  protected statusStore: StatusStore) { }
-
-  public post$(payload: Partial<ApiType>) {
-    this.notifyWorking();
-    return this.http.post<ApiType>(this.url, payload).pipe(this.statusPipe);
-  }
-  public post2$(payload: Partial<ApiType>) {
-    this.url=environment.apiUrl+"login";
-    this.notifyWorking();
-    return this.http.post<any>(this.url, payload).pipe(tap(response=>this.accessToken=response.accessToken));
+  constructor(protected http: HttpClient, private storage:StorageBase) {
+    this.accessToken=storage.getToken();
+    this.storage.setToken(this.accessToken);
   }
 
-  private notifyIdle() {
-    this.statusStore.setState({ isWorking: false, errorMessage: '' });
+  public register$(register: Register) {
+    return this.http
+      .post<AuthResponse>(this.url + 'register', register)
+      .pipe(tap((response) => {
+        this.accessToken = response.accessToken;
+        this.storage.setToken(this.accessToken);
+
+      }
+
+      ));
   }
 
-  private notifyError(message: string) {
-    this.statusStore.setState({ isWorking: false, errorMessage: message });
-  }
-
-  private notifyWorking() {
-    this.statusStore.setState({ isWorking: true, errorMessage: '' })
+  public login$(login: Login) {
+    return this.http
+      .post<AuthResponse>(this.url + 'login', login)
+      .pipe(tap((response) => {
+         this.accessToken = response.accessToken;
+        this.storage.setToken(this.accessToken);
+}));
   }
 }

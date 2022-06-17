@@ -6,13 +6,13 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthApi } from './auth.api';
+import { AuthAPI } from './auth.api';
 import { Login } from './interfaces/login.interface';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authApi:AuthApi<Login>) {}
+  constructor(private authApi:AuthAPI) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const accessToken=this.authApi.accessToken;
