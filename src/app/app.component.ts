@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SwUpdate, VersionEvent} from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  public newVersion='';
+
+  constructor(swUpdate : SwUpdate ){
+
+    swUpdate.versionUpdates.subscribe((event: VersionEvent)=>{
+      if(event.type==='VERSION_READY'){
+        this.newVersion=event.latestVersion.hash?
+        JSON.stringify(event.latestVersion.hash):event.latestVersion.hash;
+      }
+    });
+    swUpdate.checkForUpdate();
+  }
+  public onReload(){
+    window.location.reload();
+  }
 }

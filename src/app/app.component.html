@@ -6,4 +6,8 @@
     <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>
+  <div *ngIf="newVersion!==''">
+  <h1>{{newVersion}}</h1>
+  <button (click)="onReload()"></button>
+</div>
 </body>
