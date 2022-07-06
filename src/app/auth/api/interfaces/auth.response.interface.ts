@@ -1,4 +1,4 @@
-export interface AuthResponse{
-  accessToken:string;
-  user:{email:string;name:string;password:string}
+export interface AuthResponse {
+  accessToken: string;
+  user: { email: string; name: string; password: string };
 }

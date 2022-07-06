@@ -9,12 +9,16 @@ export abstract class CrudApi<ApiType> {
   private statusPipe = pipe(
     tap(() => this.notifyIdle()),
     catchError((err) => {
-      this.notifyError(err.message)
-      return of(err)
+      this.notifyError(err.message);
+      return of(err);
     })
-  )
+  );
 
-  constructor(public http: HttpClient, private endPoint: string, protected statusStore: StatusStore) { }
+  constructor(
+    public http: HttpClient,
+    private endPoint: string,
+    protected statusStore: StatusStore
+  ) {}
 
   public getAll$() {
     this.notifyWorking();
@@ -42,7 +46,7 @@ export abstract class CrudApi<ApiType> {
   }
 
   private notifyWorking() {
-    this.statusStore.setState({ isWorking: true, errorMessage: '' })
+    this.statusStore.setState({ isWorking: true, errorMessage: '' });
   }
 
   private notifyIdle() {
@@ -52,7 +56,6 @@ export abstract class CrudApi<ApiType> {
   private notifyError(message: string) {
     this.statusStore.setState({ isWorking: false, errorMessage: message });
   }
-
 
   // public getByIdb$(id: string) {
   //   this.notifyWorking();
@@ -64,7 +67,4 @@ export abstract class CrudApi<ApiType> {
   //   if (text === null || text == '') return this.getAll$();
   //   return this.http.get<ApiType[]>(this.url + '?q=' + text); // .pipe(delay(3000));
   // }
-
-
-
 }

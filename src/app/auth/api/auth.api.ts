@@ -15,29 +15,33 @@ export class AuthAPI {
 
   public accessToken = '';
 
-  constructor(protected http: HttpClient, private storage:StorageBase) {
-    this.accessToken=storage.getToken();
+  constructor(protected http: HttpClient, private storage: StorageBase) {
+    this.accessToken = storage.getToken();
     this.storage.setToken(this.accessToken);
   }
 
   public register$(register: Register) {
+    console.log('asdf');
     return this.http
-      .post<AuthResponse>(this.url + 'register', register)
-      .pipe(tap((response) => {
-        this.accessToken = response.accessToken;
-        this.storage.setToken(this.accessToken);
-
-      }
-
-      ));
+      .post<AuthResponse>(this.url + 'auth/registration', register)
+      .pipe(
+        tap((response) => {
+          this.accessToken = response.accessToken;
+          console.log('TOKEN: ' + this.accessToken);
+          this.storage.setToken(this.accessToken);
+        })
+      );
   }
 
   public login$(login: Login) {
-    return this.http
-      .post<AuthResponse>(this.url + 'login', login)
-      .pipe(tap((response) => {
-         this.accessToken = response.accessToken;
+    console.log('qwer');
+
+    return this.http.post<AuthResponse>(this.url + 'auth/login', login).pipe(
+      tap((response) => {
+        this.accessToken = response.accessToken;
+        console.log('TOKEN: ' + this.accessToken);
         this.storage.setToken(this.accessToken);
-}));
+      })
+    );
   }
 }

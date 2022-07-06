@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthAPI } from './auth.api';
@@ -11,22 +11,23 @@ import { Login } from './interfaces/login.interface';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authApi: AuthAPI) {}
 
-  constructor(private authApi:AuthAPI) {}
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const accessToken=this.authApi.accessToken;
-    if(accessToken===''){
-          return next.handle(request);
-    }else{
-
-      request=request.clone({
-        setHeaders:{
-          Authorization:`Bearer ${accessToken}`,
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    const accessToken = this.authApi.accessToken;
+    console.log('AT!' + accessToken);
+    if (accessToken === '') {
+      return next.handle(request);
+    } else {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       return next.handle(request);
-
     }
   }
 }
